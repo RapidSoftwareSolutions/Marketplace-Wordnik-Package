@@ -27,7 +27,7 @@
             "description": "Get your access token",
             "args": [
                 {
-                    "name": "usename",
+                    "name": "username",
                     "type": "String",
                     "info": "Your username",
                     "required": true
@@ -661,7 +661,7 @@
             ]
         },
         {
-            "name": "getWordPronounciations",
+            "name": "getWordPronunciations",
             "description": "Returns text pronunciations for a given word",
             "args": [
                 {

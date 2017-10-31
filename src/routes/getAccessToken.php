@@ -4,7 +4,7 @@ $app->post('/api/Wordnik/getAccessToken', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['usename','password','apiKey']);
+    $validateRes = $checkRequest->validate($request, ['username','password','apiKey']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Wordnik/getAccessToken', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['usename'=>'usename','password'=>'password','apiKey'=>'api_key'];
+    $requiredParams = ['username'=>'username','password'=>'password','apiKey'=>'api_key'];
     $optionalParams = [];
     $bodyParams = [
        'query' => ['password','api_key']

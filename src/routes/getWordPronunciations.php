@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/Wordnik/getWordPronounciations', function ($request, $response) {
+$app->post('/api/Wordnik/getWordPronunciations', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;

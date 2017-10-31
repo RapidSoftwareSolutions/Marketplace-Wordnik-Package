@@ -27,7 +27,7 @@ Get your access token
 
 | Field   | Type       | Description
 |---------|------------|----------
-| usename | String     | Your username
+| username | String     | Your username
 | password| String     | Your password
 | apiKey  | credentials| Your apiKey
 
@@ -113,7 +113,7 @@ Given a word as a string, returns relationships from the Word Graph
 | relationshipTypes       | Select     | Limits the total results per type of relationship type
 | limitPerRelationshipType| Number     | Restrict to the supplied relationship types
 
-## Wordnik.getWordPronounciations
+## Wordnik.getWordPronunciations
 Returns text pronunciations for a given word
 
 | Field           | Type       | Description

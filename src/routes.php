@@ -10,7 +10,7 @@ $routes = [
     'listWordDefinitions',
     'getWordTopExample',
     'listWordRelatedWords',
-    'getWordPronounciations',
+    'getWordPronunciations',
     'getWordHyphenation',
     'getWordFrequency',
     'listWordBigramPhrases',
