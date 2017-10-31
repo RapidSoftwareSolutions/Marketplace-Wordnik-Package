@@ -2155,7 +2155,7 @@
                 "method": "get",
                 "requestParameters": [
                     {
-                        "type": "json",
+                        "type": "query",
                         "parameters": [
                             "api_key",
                             "auth_token",

@@ -15,7 +15,7 @@ $app->post('/api/Wordnik/listWordlistWords', function ($request, $response) {
     $requiredParams = ['apiKey'=>'api_key','accessToken'=>'auth_token','permalink'=>'permalink'];
     $optionalParams = ['sortBy'=>'sortBy','sortOrder'=>'sortOrder','skip'=>'skip','limit'=>'limit'];
     $bodyParams = [
-       'json' => ['api_key','auth_token','sortBy','sortOrder','skip','limit']
+       'query' => ['api_key','auth_token','sortBy','sortOrder','skip','limit'],
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

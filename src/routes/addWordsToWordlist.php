@@ -30,7 +30,6 @@ $app->post('/api/Wordnik/addWordsToWordlist', function ($request, $response) {
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];
-     
 
     try {
         $resp = $client->post($query_str, $requestParams);
