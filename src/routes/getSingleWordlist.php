@@ -23,7 +23,7 @@ $app->post('/api/Wordnik/getSingleWordlist', function ($request, $response) {
     
 
     $client = $this->httpClient;
-    $query_str = "http://api.wordnik.com:80/v4/wordLists.json/{$data['permalink']}";
+    $query_str = "http://api.wordnik.com:80/v4/wordList.json/{$data['permalink']}";
 
     
 

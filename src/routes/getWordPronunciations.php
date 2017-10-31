@@ -23,7 +23,7 @@ $app->post('/api/Wordnik/getWordPronunciations', function ($request, $response) 
     
 
     $client = $this->httpClient;
-    $query_str = "http://api.wordnik.com:80/v4/word.json/${data['word']}/pronounciations";
+    $query_str = "http://api.wordnik.com:80/v4/word.json/${data['word']}/pronunciations";
 
     
 

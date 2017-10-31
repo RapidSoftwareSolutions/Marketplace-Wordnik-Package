@@ -24,7 +24,7 @@ $app->post('/api/Wordnik/addWordsToWordlist', function ($request, $response) {
     
 
     $client = $this->httpClient;
-    $query_str = "http://api.wordnik.com:80/v4/wordLists.json/{$data['permalink']}/words";
+    $query_str = "http://api.wordnik.com:80/v4/wordList.json/{$data['permalink']}/words";
 
     
 

@@ -6,7 +6,7 @@ Wordnik APIs let you request definitions from the The Century Dictionary, freque
 * Credentials: apiKey
 
 ## How to get credentials: 
-0. Browse to [Wordnik](Browse to http://www.wordnik.com)
+0. Browse to [Wordnik](http://www.wordnik.com)
 1. Register or log in
 2. Browse to [Settings page](http://www.wordnik.com/users/edit) to get your apiKey
 
