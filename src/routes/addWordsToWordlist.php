@@ -15,7 +15,8 @@ $app->post('/api/Wordnik/addWordsToWordlist', function ($request, $response) {
     $requiredParams = ['apiKey'=>'api_key','accessToken'=>'auth_token','permalink'=>'permalink','words'=>'words'];
     $optionalParams = [];
     $bodyParams = [
-       'json' => ['api_key','auth_token','words']
+       'json' => ['words'],
+        "query" => ['api_key','auth_token']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

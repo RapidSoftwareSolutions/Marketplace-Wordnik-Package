@@ -1926,11 +1926,17 @@
                     {
                         "type": "json",
                         "parameters": [
-                            "api_key",
-                            "auth_token",
                             "name",
                             "type",
                             "description"
+                        ]
+                    },
+                    {
+
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "auth_token"
                         ]
                     }
                 ]
@@ -2057,11 +2063,17 @@
                     {
                         "type": "json",
                         "parameters": [
-                            "api_key",
-                            "auth_token",
                             "name",
                             "type",
                             "description"
+                        ]
+                    },
+                    {
+
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "auth_token"
                         ]
                     }
                 ]
@@ -2213,9 +2225,15 @@
                     {
                         "type": "json",
                         "parameters": [
-                            "api_key",
-                            "auth_token",
                             "words"
+                        ]
+                    },
+                    {
+
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "auth_token"
                         ]
                     }
                 ]
@@ -2278,9 +2296,15 @@
                     {
                         "type": "json",
                         "parameters": [
-                            "api_key",
-                            "auth_token",
                             "words"
+                        ]
+                    },
+                    {
+
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "auth_token"
                         ]
                     }
                 ]
