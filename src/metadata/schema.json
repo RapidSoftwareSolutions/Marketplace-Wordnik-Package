@@ -1,0 +1,2353 @@
+{
+    "package": "Wordnik",
+    "tagline": "Wordnik API",
+    "description": "Wordnik APIs let you request definitions from the The Century Dictionary, frequency data reflecting occurrences in our corpus, example sentences for words, spelling suggestions, word autocompletion, and words of the day, and more on the way.",
+    "image": "https:\/\/logo.clearbit.com\/wordnik.com",
+    "repo": "https:\/\/github.com\/RapidSoftwareSolutions\/Marketplace-Wordnik-Package",
+    "keywords": [
+        "API",
+        "words",
+        "lexics",
+        "vocabulary"
+    ],
+    "accounts": {
+        "domain": "http://wordnik.com\/",
+        "credentials": [
+            "apiKey"
+        ]
+    },
+    "steps":[
+      "Browse to http://www.wordnik.com",
+      "Register or log in",
+      "Browse to http://www.wordnik.com/users/edit to get your apiKey"
+    ],
+    "blocks": [
+        {
+            "name": "getAccessToken",
+            "description": "Get your access token",
+            "args": [
+                {
+                    "name": "usename",
+                    "type": "String",
+                    "info": "Your username",
+                    "required": true
+                },
+                {
+                    "name": "password",
+                    "type": "String",
+                    "info": "Your password",
+                    "required": true
+                },
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/account.json\/authenticate\/{$data['username']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "password",
+                            "api_key"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listMyWordsLists",
+            "description": "Fetches WordList objects for the logged-in user",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token you recieved",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "auth_token"
+                    }
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Results to skip",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Maximum number of results to return",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/account.json\/wordLists",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "auth_token",
+                            "api_key",
+                            "skip",
+                            "limit"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getMyApiTokenStatus",
+            "description": "Returns usage statistics for the API account.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token you recieved",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "auth_token"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/account.json\/apiTokenStatus",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "auth_token",
+                            "api_key",
+                            "skip",
+                            "limit"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getCurrentUserInfo",
+            "description": "Returns the logged-in User",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token you recieved",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "auth_token"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/account.json\/user",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "auth_token",
+                            "api_key"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listWordExamples",
+            "description": "Returns examples for a word",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "word",
+                    "type": "String",
+                    "info": "Word to return examples for",
+                    "required": true
+                },
+                {
+                    "name": "includeDuplicates",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Show duplicate examples from different sources",
+                    "required": false
+                },
+                {
+                    "name": "useCanonical",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.",
+                    "required": false
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Results to skip",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Maximum number of results to return",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/word.json\/${data['word']}\/examples",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "word",
+                            "includeDuplicates",
+                            "useCanonical",
+                            "skip",
+                            "limit"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getWordObject",
+            "description": "Given a word as a string, returns the WordObject that represents this word",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "word",
+                    "type": "String",
+                    "info": "Word to return examples for",
+                    "required": true
+                },
+                {
+                    "name": "includeDuplicates",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Show duplicate examples from different sources",
+                    "required": false
+                },
+                {
+                    "name": "useCanonical",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/word.json\/${data['word']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "word",
+                            "includeDuplicates",
+                            "useCanonical"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listWordDefinitions",
+            "description": "Returns definitions for a word",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "word",
+                    "type": "String",
+                    "info": "Word to return examples for",
+                    "required": true
+                },
+                {
+                    "name": "partOfSpeech",
+                    "type": "Select",
+                    "options": [
+                        "noun",
+                        "adjective",
+                        "verb",
+                        "adverb",
+                        "interjection",
+                        "pronoun",
+                        "preposition",
+                        "abbreviation",
+                        "affix",
+                        "article",
+                        "auxiliary-verb",
+                        "conjunction",
+                        "definite-article",
+                        "family-name",
+                        "given-name",
+                        "idiom",
+                        "imperative",
+                        "noun-plural",
+                        "noun-posessive",
+                        "past-participle",
+                        "phrasal-prefix",
+                        "proper-noun",
+                        "proper-noun-plural",
+                        "proper-noun-posessive",
+                        "suffix",
+                        "verb-intransitive",
+                        "verb-transitive"
+                    ],
+                    "info": "Speech type",
+                    "required": false
+                },
+                {
+                    "name": "includeRelated",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Return related words with definitions",
+                    "required": false
+                },
+                {
+                    "name": "sourceDictionaries",
+                    "type": "List",
+                    "structure": {
+                        "name": "sourceDictionary",
+                        "type": "Select",
+                        "options": [
+                            "all",
+                            "ahd",
+                            "century",
+                            "wiktionary",
+                            "webster",
+                            "wordnet"
+                        ],
+                        "info": "Single source"
+                    },
+                    "info": "Source dictionary to return definitions from. If 'all' is received, results are returned from all sources. If multiple values are received (e.g. 'century,wiktionary'), results are returned from the first specified dictionary that has definitions. If left blank, results are returned from the first dictionary that has definitions. By default, dictionaries are searched in this order: ahd, wiktionary, webster, century, wordnet",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "useCanonical",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.",
+                    "required": false
+                },
+                {
+                    "name": "includeTags",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Return a closed set of XML tags in response",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Maximum number of results to return",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/word.json\/${data['word']}\/definitions",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "word",
+                            "partOfSpeech",
+                            "includeRelated",
+                            "sourceDictionaries",
+                            "includeTags",
+                            "useCanonical",
+                            "limit"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getWordTopExample",
+            "description": "Returns a top example for a word",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "word",
+                    "type": "String",
+                    "info": "Word to return examples for",
+                    "required": true
+                },
+                {
+                    "name": "useCanonical",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/word.json\/${data['word']}\/topExample",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "word",
+                            "useCanonical"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listWordRelatedWords",
+            "description": "Given a word as a string, returns relationships from the Word Graph",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "word",
+                    "type": "String",
+                    "info": "Word to return examples for",
+                    "required": true
+                },
+                {
+                    "name": "useCanonical",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.",
+                    "required": false
+                },
+                {
+                    "name": "relationshipTypes",
+                    "type": "Select",
+                    "options": [
+                        "synonym",
+                        "antonym",
+                        "variant",
+                        "equivalent",
+                        "cross-reference",
+                        "related-word",
+                        "rhyme",
+                        "form",
+                        "etymologically-related-term",
+                        "hypernym",
+                        "hyponym",
+                        "inflected-form",
+                        "primary",
+                        "same-context",
+                        "verb-form",
+                        "verb-stem"
+                    ],
+                    "info": "Limits the total results per type of relationship type",
+                    "required": false
+                },
+                {
+                    "name": "limitPerRelationshipType",
+                    "type": "Number",
+                    "info": "Restrict to the supplied relationship types",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/word.json\/${data['word']}\/relatedWords",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "word",
+                            "useCanonical",
+                            "relationshipTypes",
+                            "limitPerRelationshipType"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getWordPronounciations",
+            "description": "Returns text pronunciations for a given word",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "word",
+                    "type": "String",
+                    "info": "Word to return examples for",
+                    "required": true
+                },
+                {
+                    "name": "sourceDictionary",
+                    "type": "Select",
+                    "options": [
+                        "ahd",
+                        "century",
+                        "wiktionary",
+                        "webster",
+                        "wordnet"
+                    ],
+                    "info": "Get from a single dictionary",
+                    "required": false
+                },
+                {
+                    "name": "useCanonical",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.",
+                    "required": false
+                },
+                {
+                    "name": "typeFormat",
+                    "type": "Select",
+                    "options": [
+                        "ahd",
+                        "arphabet",
+                        "gcide-diacritical",
+                        "IPA"
+                    ],
+                    "info": "Text pronunciation type",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Maximum number of results to return",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/word.json\/${data['word']}\/pronounciations",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "word",
+                            "sourceDictionary",
+                            "typeFormat",
+                            "useCanonical",
+                            "limit"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getWordHyphenation",
+            "description": "Returns syllable information for a word",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "word",
+                    "type": "String",
+                    "info": "Word to return examples for",
+                    "required": true
+                },
+                {
+                    "name": "sourceDictionary",
+                    "type": "Select",
+                    "options": [
+                        "ahd",
+                        "century",
+                        "wiktionary",
+                        "webster",
+                        "wordnet"
+                    ],
+                    "info": "Get from a single dictionary",
+                    "required": false
+                },
+                {
+                    "name": "useCanonical",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Maximum number of results to return",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/word.json\/${data['word']}\/hyphenation",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "word",
+                            "sourceDictionary",
+                            "useCanonical",
+                            "limit"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getWordFrequency",
+            "description": "Returns word usage over time",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "word",
+                    "type": "String",
+                    "info": "Word to return examples for",
+                    "required": true
+                },
+                {
+                    "name": "useCanonical",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.",
+                    "required": false
+                },
+                {
+                    "name": "startYear",
+                    "type": "Number",
+                    "info": "Starting Year",
+                    "required": false
+                },
+                {
+                    "name": "endYear",
+                    "type": "Number",
+                    "info": "Ending Year",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/word.json\/${data['word']}\/frequency",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "word",
+                            "useCanonical",
+                            "startYear",
+                            "endYear"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listWordBigramPhrases",
+            "description": "Fetches bi-gram phrases for a word",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "word",
+                    "type": "String",
+                    "info": "Word to return examples for",
+                    "required": true
+                },
+                {
+                    "name": "useCanonical",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.",
+                    "required": false
+                },
+                {
+                    "name": "wlmi",
+                    "type": "Number",
+                    "info": "Minimum WLMI for the phrase",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Maximum number of results to return",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/word.json\/${data['word']}\/phrases",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "word",
+                            "useCanonical",
+                            "wlmi",
+                            "limit"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getWordEtymology",
+            "description": "Fetches etymology data",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "word",
+                    "type": "String",
+                    "info": "Word to return examples for",
+                    "required": true
+                },
+                {
+                    "name": "useCanonical",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/word.json\/${data['word']}\/etymologies",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "word",
+                            "useCanonical"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getWordAudio",
+            "description": "Fetches audio metadata for a word",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "word",
+                    "type": "String",
+                    "info": "Word to return examples for",
+                    "required": true
+                },
+                {
+                    "name": "useCanonical",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/word.json\/${data['word']}\/audio",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "word",
+                            "useCanonical"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "searchWords",
+            "description": "Searches words",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "query",
+                    "type": "String",
+                    "info": "Search query",
+                    "required": true
+                },
+                {
+                    "name": "caseSensitive",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Search case sensitive",
+                    "required": false
+                },
+                {
+                    "name": "includePartOfSpeech",
+                    "type": "List",
+                    "structure": {
+                        "name": "partOfSpeech",
+                        "type": "Select",
+                        "options": [
+                            "noun",
+                            "adjective",
+                            "verb",
+                            "adverb",
+                            "interjection",
+                            "pronoun",
+                            "preposition",
+                            "abbreviation",
+                            "affix",
+                            "article",
+                            "auxiliary-verb",
+                            "conjunction",
+                            "definite-article",
+                            "family-name",
+                            "given-name",
+                            "idiom",
+                            "imperative",
+                            "noun-plural",
+                            "noun-posessive",
+                            "past-participle",
+                            "phrasal-prefix",
+                            "proper-noun",
+                            "proper-noun-plural",
+                            "proper-noun-posessive",
+                            "suffix",
+                            "verb-intransitive",
+                            "verb-transitive"
+                        ],
+                        "info": "Single part of speech"
+                    },
+                    "info": "Only include this list of parts of speech",
+                    "required": false
+                },
+                {
+                    "name": "excludePartOfSpeech",
+                    "type": "List",
+                    "structure": {
+                        "name": "partOfSpeech",
+                        "type": "Select",
+                        "options": [
+                            "noun",
+                            "adjective",
+                            "verb",
+                            "adverb",
+                            "interjection",
+                            "pronoun",
+                            "preposition",
+                            "abbreviation",
+                            "affix",
+                            "article",
+                            "auxiliary-verb",
+                            "conjunction",
+                            "definite-article",
+                            "family-name",
+                            "given-name",
+                            "idiom",
+                            "imperative",
+                            "noun-plural",
+                            "noun-posessive",
+                            "past-participle",
+                            "phrasal-prefix",
+                            "proper-noun",
+                            "proper-noun-plural",
+                            "proper-noun-posessive",
+                            "suffix",
+                            "verb-intransitive",
+                            "verb-transitive"
+                        ],
+                        "info": "Single part of speech"
+                    },
+                    "info": "Exclude this list of parts of speech",
+                    "required": false
+                },
+                {
+                    "name": "minCorpusCount",
+                    "type": "Number",
+                    "info": "Minimum corpus frequency for terms",
+                    "required": false
+                },
+                {
+                    "name": "maxCorpusCount",
+                    "type": "Number",
+                    "info": "Maximum corpus frequency for terms",
+                    "required": false
+                },
+                {
+                    "name": "minDictionaryCount",
+                    "type": "Number",
+                    "info": "Minimum number of dictionary entries for words returned",
+                    "required": false
+                },
+                {
+                    "name": "maxDictionaryCount",
+                    "type": "Number",
+                    "info": "Maximum number of dictionary entries for words returned",
+                    "required": false
+                },
+                {
+                    "name": "minLength",
+                    "type": "Number",
+                    "info": "Minimum word length",
+                    "required": false
+                },
+                {
+                    "name": "maxLength",
+                    "type": "Number",
+                    "info": "Maximum word length",
+                    "required": false
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Results to skip",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Maximum number of results to return",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/words.json\/search",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "query",
+                            "caseSensitive",
+                            "includePartOfSpeech",
+                            "excludePartOfSpeech",
+                            "minCorpusCount",
+                            "maxCorpusCount",
+                            "minDictionaryCount",
+                            "maxDictionaryCount",
+                            "minLength",
+                            "maxLength",
+                            "skip",
+                            "limit"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getWordOfTheDay",
+            "description": "Returns a specific WordOfTheDay",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "date",
+                    "type": "DatePicker",
+                    "info": "Fetches by date in yyyy-MM-dd",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/words.json\/wordOfTheDay",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "date"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "reverseDictionarySearch",
+            "description": "Reverse dictionary search",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "query",
+                    "type": "String",
+                    "info": "Search query",
+                    "required": true
+                },
+                {
+                    "name": "findSenseForWord",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Restricts words and finds closest sense",
+                    "required": false
+                },
+                {
+                    "name": "includeSourceDictionaries",
+                    "type": "List",
+                    "structure": {
+                        "name": "sourceDictionary",
+                        "type": "Select",
+                        "options": [
+                            "all",
+                            "ahd",
+                            "century",
+                            "wiktionary",
+                            "webster",
+                            "wordnet"
+                        ],
+                        "info": "Single source"
+                    },
+                    "info": "Only include this list of source dictionaries",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "excludePartOfSpeech",
+                    "type": "List",
+                    "structure": {
+                        "name": "sourceDictionary",
+                        "type": "Select",
+                        "options": [
+                            "all",
+                            "ahd",
+                            "century",
+                            "wiktionary",
+                            "webster",
+                            "wordnet"
+                        ],
+                        "info": "Single source"
+                    },
+                    "info": "Exclude this list of source dictionaries",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "minCorpusCount",
+                    "type": "Number",
+                    "info": "Minimum corpus frequency for terms",
+                    "required": false
+                },
+                {
+                    "name": "maxCorpusCount",
+                    "type": "Number",
+                    "info": "Maximum corpus frequency for terms",
+                    "required": false
+                },
+                {
+                    "name": "minLength",
+                    "type": "Number",
+                    "info": "Minimum word length",
+                    "required": false
+                },
+                {
+                    "name": "maxLength",
+                    "type": "Number",
+                    "info": "Maximum word length",
+                    "required": false
+                },
+                {
+                    "name": "expandTerms",
+                    "type": "Select",
+                    "options": [
+                        "synonym",
+                        "hypernym"
+                    ],
+                    "info": "Expand terms",
+                    "required": false
+                },
+                {
+                    "name": "includeTags",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Return a closed set of XML tags in response",
+                    "required": false
+                },
+                {
+                    "name": "sortBy",
+                    "type": "Select",
+                    "options": [
+                        "alpha",
+                        "count",
+                        "length"
+                    ],
+                    "info": "Attribute to sort by",
+                    "required": false
+                },
+                {
+                    "name": "sortOrder",
+                    "type": "Select",
+                    "options": [
+                        "alpha",
+                        "count",
+                        "length"
+                    ],
+                    "info": "Sort direction",
+                    "required": false
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Results to skip",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Maximum number of results to return",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/words.json\/reverseDictionary",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "query",
+                            "findSenseForWord",
+                            "includeSourceDictionaries",
+                            "excludePartOfSpeech",
+                            "minCorpusCount",
+                            "maxCorpusCount",
+                            "minLength",
+                            "maxLength",
+                            "expandTerms",
+                            "includeTags",
+                            "sortBy",
+                            "sortOrder",
+                            "skip",
+                            "limit"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listRandomWords",
+            "description": "Returns an array of random WordObjects",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "hasDictionaryDef",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Search case sensitive",
+                    "required": false
+                },
+                {
+                    "name": "includePartOfSpeech",
+                    "type": "List",
+                    "structure": {
+                        "name": "partOfSpeech",
+                        "type": "Select",
+                        "options": [
+                            "noun",
+                            "adjective",
+                            "verb",
+                            "adverb",
+                            "interjection",
+                            "pronoun",
+                            "preposition",
+                            "abbreviation",
+                            "affix",
+                            "article",
+                            "auxiliary-verb",
+                            "conjunction",
+                            "definite-article",
+                            "family-name",
+                            "given-name",
+                            "idiom",
+                            "imperative",
+                            "noun-plural",
+                            "noun-posessive",
+                            "past-participle",
+                            "phrasal-prefix",
+                            "proper-noun",
+                            "proper-noun-plural",
+                            "proper-noun-posessive",
+                            "suffix",
+                            "verb-intransitive",
+                            "verb-transitive"
+                        ],
+                        "info": "Single part of speech"
+                    },
+                    "info": "Only include this list of parts of speech",
+                    "required": false
+                },
+                {
+                    "name": "excludePartOfSpeech",
+                    "type": "List",
+                    "structure": {
+                        "name": "partOfSpeech",
+                        "type": "Select",
+                        "options": [
+                            "noun",
+                            "adjective",
+                            "verb",
+                            "adverb",
+                            "interjection",
+                            "pronoun",
+                            "preposition",
+                            "abbreviation",
+                            "affix",
+                            "article",
+                            "auxiliary-verb",
+                            "conjunction",
+                            "definite-article",
+                            "family-name",
+                            "given-name",
+                            "idiom",
+                            "imperative",
+                            "noun-plural",
+                            "noun-posessive",
+                            "past-participle",
+                            "phrasal-prefix",
+                            "proper-noun",
+                            "proper-noun-plural",
+                            "proper-noun-posessive",
+                            "suffix",
+                            "verb-intransitive",
+                            "verb-transitive"
+                        ],
+                        "info": "Single part of speech"
+                    },
+                    "info": "Exclude this list of parts of speech",
+                    "required": false
+                },
+                {
+                    "name": "minCorpusCount",
+                    "type": "Number",
+                    "info": "Minimum corpus frequency for terms",
+                    "required": false
+                },
+                {
+                    "name": "maxCorpusCount",
+                    "type": "Number",
+                    "info": "Maximum corpus frequency for terms",
+                    "required": false
+                },
+                {
+                    "name": "minDictionaryCount",
+                    "type": "Number",
+                    "info": "Minimum number of dictionary entries for words returned",
+                    "required": false
+                },
+                {
+                    "name": "maxDictionaryCount",
+                    "type": "Number",
+                    "info": "Maximum number of dictionary entries for words returned",
+                    "required": false
+                },
+                {
+                    "name": "minLength",
+                    "type": "Number",
+                    "info": "Minimum word length",
+                    "required": false
+                },
+                {
+                    "name": "maxLength",
+                    "type": "Number",
+                    "info": "Maximum word length",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Maximum number of results to return",
+                    "required": false
+                },
+                {
+                    "name": "sortBy",
+                    "type": "Select",
+                    "options": [
+                        "alpha",
+                        "count",
+                        "length"
+                    ],
+                    "info": "Attribute to sort by",
+                    "required": false
+                },
+                {
+                    "name": "sortOrder",
+                    "type": "Select",
+                    "options": [
+                        "alpha",
+                        "count",
+                        "length"
+                    ],
+                    "info": "Sort direction",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/words.json\/randomWords",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "hasDictionaryDef",
+                            "includePartOfSpeech",
+                            "excludePartOfSpeech",
+                            "minCorpusCount",
+                            "maxCorpusCount",
+                            "minDictionaryCount",
+                            "maxDictionaryCount",
+                            "minLength",
+                            "maxLength",
+                            "limit",
+                            "sortBy",
+                            "sortOrder"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleRandomWord",
+            "description": "Returns a random WordObject",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "hasDictionaryDef",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Search case sensitive",
+                    "required": false
+                },
+                {
+                    "name": "includePartOfSpeech",
+                    "type": "List",
+                    "structure": {
+                        "name": "partOfSpeech",
+                        "type": "Select",
+                        "options": [
+                            "noun",
+                            "adjective",
+                            "verb",
+                            "adverb",
+                            "interjection",
+                            "pronoun",
+                            "preposition",
+                            "abbreviation",
+                            "affix",
+                            "article",
+                            "auxiliary-verb",
+                            "conjunction",
+                            "definite-article",
+                            "family-name",
+                            "given-name",
+                            "idiom",
+                            "imperative",
+                            "noun-plural",
+                            "noun-posessive",
+                            "past-participle",
+                            "phrasal-prefix",
+                            "proper-noun",
+                            "proper-noun-plural",
+                            "proper-noun-posessive",
+                            "suffix",
+                            "verb-intransitive",
+                            "verb-transitive"
+                        ],
+                        "info": "Single part of speech"
+                    },
+                    "info": "Only include this list of parts of speech",
+                    "required": false
+                },
+                {
+                    "name": "excludePartOfSpeech",
+                    "type": "List",
+                    "structure": {
+                        "name": "partOfSpeech",
+                        "type": "Select",
+                        "options": [
+                            "noun",
+                            "adjective",
+                            "verb",
+                            "adverb",
+                            "interjection",
+                            "pronoun",
+                            "preposition",
+                            "abbreviation",
+                            "affix",
+                            "article",
+                            "auxiliary-verb",
+                            "conjunction",
+                            "definite-article",
+                            "family-name",
+                            "given-name",
+                            "idiom",
+                            "imperative",
+                            "noun-plural",
+                            "noun-posessive",
+                            "past-participle",
+                            "phrasal-prefix",
+                            "proper-noun",
+                            "proper-noun-plural",
+                            "proper-noun-posessive",
+                            "suffix",
+                            "verb-intransitive",
+                            "verb-transitive"
+                        ],
+                        "info": "Single part of speech"
+                    },
+                    "info": "Exclude this list of parts of speech",
+                    "required": false
+                },
+                {
+                    "name": "minCorpusCount",
+                    "type": "Number",
+                    "info": "Minimum corpus frequency for terms",
+                    "required": false
+                },
+                {
+                    "name": "maxCorpusCount",
+                    "type": "Number",
+                    "info": "Maximum corpus frequency for terms",
+                    "required": false
+                },
+                {
+                    "name": "minDictionaryCount",
+                    "type": "Number",
+                    "info": "Minimum number of dictionary entries for words returned",
+                    "required": false
+                },
+                {
+                    "name": "maxDictionaryCount",
+                    "type": "Number",
+                    "info": "Maximum number of dictionary entries for words returned",
+                    "required": false
+                },
+                {
+                    "name": "minLength",
+                    "type": "Number",
+                    "info": "Minimum word length",
+                    "required": false
+                },
+                {
+                    "name": "maxLength",
+                    "type": "Number",
+                    "info": "Maximum word length",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/words.json\/randomWord",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "hasDictionaryDef",
+                            "includePartOfSpeech",
+                            "excludePartOfSpeech",
+                            "minCorpusCount",
+                            "maxCorpusCount",
+                            "minDictionaryCount",
+                            "maxDictionaryCount",
+                            "minLength",
+                            "maxLength"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "addWordlist",
+            "description": "Creates a WordList",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token you recieved",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "auth_token"
+                    }
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Name of the wordlist",
+                    "required": true
+                },
+                {
+                    "name": "type",
+                    "type": "Select",
+                    "options": [
+                        "PUBLIC",
+                        "PRIVATE"
+                    ],
+                    "info": "Type of the wordlist",
+                    "required": true
+                },
+                {
+                    "name": "description",
+                    "type": "String",
+                    "info": "Description of the wordlist",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/wordLists.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "api_key",
+                            "auth_token",
+                            "name",
+                            "type",
+                            "description"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleWordlist",
+            "description": "Fetches single wordlist",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token you recieved",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "auth_token"
+                    }
+                },
+                {
+                    "name": "permalink",
+                    "type": "String",
+                    "info": "Permalink of the wordlist",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/wordLists.json\/{$data['permalink']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "api_key",
+                            "auth_token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateWordlist",
+            "description": "Updates single wordlist",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token you recieved",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "auth_token"
+                    }
+                },
+                {
+                    "name": "permalink",
+                    "type": "String",
+                    "info": "Permalink of the wordlist",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Name of the wordlist",
+                    "required": false
+                },
+                {
+                    "name": "type",
+                    "type": "Select",
+                    "options": [
+                        "PUBLIC",
+                        "PRIVATE"
+                    ],
+                    "info": "Type of the wordlist",
+                    "required": false
+                },
+                {
+                    "name": "description",
+                    "type": "String",
+                    "info": "Description of the wordlist",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/wordLists.json\/{$data['permalink']}",
+                "method": "put",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "api_key",
+                            "auth_token",
+                            "name",
+                            "type",
+                            "description"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listWordlistWords",
+            "description": "Fetches words from the single wordlist",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token you recieved",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "auth_token"
+                    }
+                },
+                {
+                    "name": "permalink",
+                    "type": "String",
+                    "info": "Permalink of the wordlist",
+                    "required": true
+                },
+                {
+                    "name": "sortBy",
+                    "type": "Select",
+                    "options": [
+                        "createDate",
+                        "alpha"
+                    ],
+                    "info": "Attribute to sort by",
+                    "required": false
+                },
+                {
+                    "name": "sortOrder",
+                    "type": "Select",
+                    "options": [
+                        "asc",
+                        "desc"
+                    ],
+                    "info": "Sort direction",
+                    "required": false
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Results to skip",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Maximum number of results to return",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/wordLists.json\/{$data['permalink']}\/words",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "api_key",
+                            "auth_token",
+                            "sortBy",
+                            "sortOrder",
+                            "skip",
+                            "limit"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "addWordsToWordlist",
+            "description": "Add words to single wordlist",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token you recieved",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "auth_token"
+                    }
+                },
+                {
+                    "name": "permalink",
+                    "type": "String",
+                    "info": "Permalink of the wordlist",
+                    "required": true
+                },
+                {
+                    "name": "words",
+                    "type": "List",
+                    "structure": {
+                        "name": "word",
+                        "type": "String",
+                        "info": "Single word to add"
+                    },
+                    "info": "List of words to add",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/wordLists.json\/{$data['permalink']}\/words",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "api_key",
+                            "auth_token",
+                            "words"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteWordsFromWordlist",
+            "description": "Removes words from wordlist",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token you recieved",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "auth_token"
+                    }
+                },
+                {
+                    "name": "permalink",
+                    "type": "String",
+                    "info": "Permalink of the wordlist",
+                    "required": true
+                },
+                {
+                    "name": "words",
+                    "type": "List",
+                    "structure": {
+                        "name": "word",
+                        "type": "String",
+                        "info": "Single word to remove"
+                    },
+                    "info": "List of words to remove",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/wordLists.json\/{$data['permalink']}\/deleteWords",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "api_key",
+                            "auth_token",
+                            "words"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteWordlist",
+            "description": "Deletes single wordlist",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token you recieved",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "auth_token"
+                    }
+                },
+                {
+                    "name": "permalink",
+                    "type": "String",
+                    "info": "Permalink of the wordlist",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "http:\/\/api.wordnik.com:80\/v4\/wordLists.json\/{$data['permalink']}",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "api_key",
+                            "auth_token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        }
+    ]
+}
