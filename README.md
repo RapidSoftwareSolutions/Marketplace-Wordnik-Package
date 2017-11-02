@@ -220,6 +220,7 @@ Reverse dictionary search
 | minLength                | Number     | Minimum word length
 | maxLength                | Number     | Maximum word length
 | expandTerms              | Select     | Expand terms
+| expandTerms              | Select     | Expand terms
 | includeTags              | Select     | Return a closed set of XML tags in response
 | sortBy                   | Select     | Attribute to sort by
 | sortOrder                | Select     | Sort direction
@@ -281,17 +282,6 @@ Fetches single wordlist
 | accessToken| String     | Access token you recieved
 | permalink  | String     | Permalink of the wordlist
 
-## Wordnik.updateWordlist
-Updates single wordlist
-
-| Field      | Type       | Description
-|------------|------------|----------
-| apiKey     | credentials| Your apiKey
-| accessToken| String     | Access token you recieved
-| permalink  | String     | Permalink of the wordlist
-| name       | String     | Name of the wordlist
-| type       | Select     | Type of the wordlist
-| description| String     | Description of the wordlist
 
 ## Wordnik.listWordlistWords
 Fetches words from the single wordlist
@@ -306,25 +296,6 @@ Fetches words from the single wordlist
 | skip       | Number     | Results to skip
 | limit      | Number     | Maximum number of results to return
 
-## Wordnik.addWordsToWordlist
-Add words to single wordlist
-
-| Field      | Type       | Description
-|------------|------------|----------
-| apiKey     | credentials| Your apiKey
-| accessToken| String     | Access token you recieved
-| permalink  | String     | Permalink of the wordlist
-| words      | List       | List of words to add
-
-## Wordnik.deleteWordsFromWordlist
-Removes words from wordlist
-
-| Field      | Type       | Description
-|------------|------------|----------
-| apiKey     | credentials| Your apiKey
-| accessToken| String     | Access token you recieved
-| permalink  | String     | Permalink of the wordlist
-| words      | List       | List of words to remove
 
 ## Wordnik.deleteWordlist
 Deletes single wordlist
