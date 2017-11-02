@@ -27,6 +27,15 @@
             "description": "Get your access token",
             "args": [
                 {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your apiKey",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
                     "name": "username",
                     "type": "String",
                     "info": "Your username",
@@ -37,16 +46,8 @@
                     "type": "String",
                     "info": "Your password",
                     "required": true
-                },
-                {
-                    "name": "apiKey",
-                    "type": "credentials",
-                    "info": "Your apiKey",
-                    "required": true,
-                    "vendorSchema": {
-                        "name": "api_key"
-                    }
                 }
+
             ],
             "vendorRequest": {
                 "url": "http:\/\/api.wordnik.com:80\/v4\/account.json\/authenticate\/{$data['username']}",

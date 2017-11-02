@@ -23,6 +23,8 @@ $app->post('/api/Wordnik/reverseDictionarySearch', function ($request, $response
     
     $data['includeSourceDictionaries'] = \Models\Params::toString($data['includeSourceDictionaries'], ','); 
     $data['excludePartOfSpeech'] = \Models\Params::toString($data['excludePartOfSpeech'], ','); 
+    $data['includePartOfSpeech'] = \Models\Params::toString($data['includePartOfSpeech'], ',');
+    $data['excludeSourceDictionaries'] = \Models\Params::toString($data['excludeSourceDictionaries'], ',');
 
     $client = $this->httpClient;
     $query_str = "http://api.wordnik.com:80/v4/words.json/reverseDictionary";
