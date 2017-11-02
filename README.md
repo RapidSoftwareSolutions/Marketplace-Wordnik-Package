@@ -6,7 +6,7 @@ Wordnik APIs let you request definitions from the The Century Dictionary, freque
 * Credentials: apiKey
 
 ## How to get credentials: 
-0. Browse to [Wordnik](http://www.wordnik.com)
+0. Browse to [Wordnik](Browse to http://www.wordnik.com)
 1. Register or log in
 2. Browse to [Settings page](http://www.wordnik.com/users/edit) to get your apiKey
 
@@ -76,7 +76,7 @@ Given a word as a string, returns the WordObject that represents this word
 |------------------|------------|----------
 | apiKey           | credentials| Your apiKey
 | word             | String     | Word to return examples for
-| includeDuplicates| Select     | Show duplicate examples from different sources
+| includeSuggestions| Select     | Return suggestions (for correct spelling, case variants, etc.)
 | useCanonical     | Select     | If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
 
 ## Wordnik.listWordDefinitions
@@ -210,9 +210,11 @@ Reverse dictionary search
 |--------------------------|------------|----------
 | apiKey                   | credentials| Your apiKey
 | query                    | String     | Search query
-| findSenseForWord         | Select     | Restricts words and finds closest sense
+| findSenseForWord         | String     | Restricts words and finds closest sense
 | includeSourceDictionaries| List       | Only include this list of source dictionaries
-| excludePartOfSpeech      | List       | Exclude this list of source dictionaries
+| excludeSourceDictionaries| List       | Exclude list of source dictionaries
+| excludePartOfSpeech      | List       | Exclude this list of parts of speech
+| includePartOfSpeech      | List       | Include only this list of parts of speech
 | minCorpusCount           | Number     | Minimum corpus frequency for terms
 | maxCorpusCount           | Number     | Maximum corpus frequency for terms
 | minLength                | Number     | Minimum word length

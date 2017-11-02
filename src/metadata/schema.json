@@ -329,13 +329,13 @@
                     "required": true
                 },
                 {
-                    "name": "includeDuplicates",
+                    "name": "includeSuggestions",
                     "type": "Select",
                     "options": [
                         "true",
                         "false"
                     ],
-                    "info": "Show duplicate examples from different sources",
+                    "info": "Return suggestions (for correct spelling, case variants, etc.)",
                     "required": false
                 },
                 {
@@ -358,7 +358,7 @@
                         "parameters": [
                             "api_key",
                             "word",
-                            "includeDuplicates",
+                            "includeSuggestions",
                             "useCanonical"
                         ]
                     }
@@ -685,6 +685,8 @@
                     "options": [
                         "ahd",
                         "century",
+                        "cmu",
+                        "mcmillan",
                         "wiktionary",
                         "webster",
                         "wordnet"
@@ -1331,11 +1333,7 @@
                 },
                 {
                     "name": "findSenseForWord",
-                    "type": "Select",
-                    "options": [
-                        "true",
-                        "false"
-                    ],
+                    "type": "String",
                     "info": "Restricts words and finds closest sense",
                     "required": false
                 },
@@ -1362,7 +1360,7 @@
                     }
                 },
                 {
-                    "name": "excludePartOfSpeech",
+                    "name": "excludeSourceDictionaries",
                     "type": "List",
                     "structure": {
                         "name": "sourceDictionary",
@@ -1378,6 +1376,92 @@
                         "info": "Single source"
                     },
                     "info": "Exclude this list of source dictionaries",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "excludePartOfSpeech",
+                    "type": "List",
+                    "structure": {
+                        "name": "partOfSpeech",
+                        "type": "Select",
+                        "options": [
+                            "noun",
+                            "adjective",
+                            "verb",
+                            "adverb",
+                            "interjection",
+                            "pronoun",
+                            "preposition",
+                            "abbreviation",
+                            "affix",
+                            "article",
+                            "auxiliary-verb",
+                            "conjunction",
+                            "definite-article",
+                            "family-name",
+                            "given-name",
+                            "idiom",
+                            "imperative",
+                            "noun-plural",
+                            "noun-posessive",
+                            "past-participle",
+                            "phrasal-prefix",
+                            "proper-noun",
+                            "proper-noun-plural",
+                            "proper-noun-posessive",
+                            "suffix",
+                            "verb-intransitive",
+                            "verb-transitive"
+                        ],
+                        "info": "Single part of speech"
+                    },
+                    "info": "Exclude this list of parts of speech",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "includePartOfSpeech",
+                    "type": "List",
+                    "structure": {
+                        "name": "partOfSpeech",
+                        "type": "Select",
+                        "options": [
+                            "noun",
+                            "adjective",
+                            "verb",
+                            "adverb",
+                            "interjection",
+                            "pronoun",
+                            "preposition",
+                            "abbreviation",
+                            "affix",
+                            "article",
+                            "auxiliary-verb",
+                            "conjunction",
+                            "definite-article",
+                            "family-name",
+                            "given-name",
+                            "idiom",
+                            "imperative",
+                            "noun-plural",
+                            "noun-posessive",
+                            "past-participle",
+                            "phrasal-prefix",
+                            "proper-noun",
+                            "proper-noun-plural",
+                            "proper-noun-posessive",
+                            "suffix",
+                            "verb-intransitive",
+                            "verb-transitive"
+                        ],
+                        "info": "Single part of speech"
+                    },
+                    "info": "Include only this list of parts of speech",
                     "required": false,
                     "vendorSchema": {
                         "format": "toString:{,}"
@@ -1442,9 +1526,8 @@
                     "name": "sortOrder",
                     "type": "Select",
                     "options": [
-                        "alpha",
-                        "count",
-                        "length"
+                        "asc",
+                        "desc"
                     ],
                     "info": "Sort direction",
                     "required": false
@@ -1473,7 +1556,9 @@
                             "query",
                             "findSenseForWord",
                             "includeSourceDictionaries",
+                            "excludeSourceDictionaries",
                             "excludePartOfSpeech",
+                            "includePartOfSpeech",
                             "minCorpusCount",
                             "maxCorpusCount",
                             "minLength",
@@ -1649,8 +1734,7 @@
                     "type": "Select",
                     "options": [
                         "alpha",
-                        "count",
-                        "length"
+                        "count"
                     ],
                     "info": "Attribute to sort by",
                     "required": false
@@ -1659,9 +1743,8 @@
                     "name": "sortOrder",
                     "type": "Select",
                     "options": [
-                        "alpha",
-                        "count",
-                        "length"
+                        "asc",
+                        "desc"
                     ],
                     "info": "Sort direction",
                     "required": false

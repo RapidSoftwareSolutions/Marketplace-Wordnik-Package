@@ -13,9 +13,9 @@ $app->post('/api/Wordnik/getWordObject', function ($request, $response) {
     }
 
     $requiredParams = ['apiKey'=>'api_key','word'=>'word'];
-    $optionalParams = ['includeDuplicates'=>'includeDuplicates','useCanonical'=>'useCanonical'];
+    $optionalParams = ['includeSuggestions'=>'includeSuggestions','useCanonical'=>'useCanonical'];
     $bodyParams = [
-       'query' => ['api_key','word','includeDuplicates','useCanonical']
+       'query' => ['api_key','word','includeSuggestions','useCanonical']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

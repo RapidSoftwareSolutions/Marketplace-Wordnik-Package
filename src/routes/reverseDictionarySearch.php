@@ -13,9 +13,9 @@ $app->post('/api/Wordnik/reverseDictionarySearch', function ($request, $response
     }
 
     $requiredParams = ['apiKey'=>'api_key','query'=>'query'];
-    $optionalParams = ['findSenseForWord'=>'findSenseForWord','includeSourceDictionaries'=>'includeSourceDictionaries','excludePartOfSpeech'=>'excludePartOfSpeech','minCorpusCount'=>'minCorpusCount','maxCorpusCount'=>'maxCorpusCount','minLength'=>'minLength','maxLength'=>'maxLength','expandTerms'=>'expandTerms','includeTags'=>'includeTags','sortBy'=>'sortBy','sortOrder'=>'sortOrder','skip'=>'skip','limit'=>'limit'];
+    $optionalParams = ['includePartOfSpeech'=>'includePartOfSpeech','findSenseForWord'=>'findSenseForWord','includeSourceDictionaries'=>'includeSourceDictionaries','excludeSourceDictionaries'=>'excludeSourceDictionaries','excludePartOfSpeech'=>'excludePartOfSpeech','minCorpusCount'=>'minCorpusCount','maxCorpusCount'=>'maxCorpusCount','minLength'=>'minLength','maxLength'=>'maxLength','expandTerms'=>'expandTerms','includeTags'=>'includeTags','sortBy'=>'sortBy','sortOrder'=>'sortOrder','skip'=>'skip','limit'=>'limit'];
     $bodyParams = [
-       'query' => ['api_key','query','findSenseForWord','includeSourceDictionaries','excludePartOfSpeech','minCorpusCount','maxCorpusCount','minLength','maxLength','expandTerms','includeTags','sortBy','sortOrder','skip','limit']
+       'query' => ['includePartOfSpeech','excludeSourceDictionaries','api_key','query','findSenseForWord','includeSourceDictionaries','excludePartOfSpeech','minCorpusCount','maxCorpusCount','minLength','maxLength','expandTerms','includeTags','sortBy','sortOrder','skip','limit']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
